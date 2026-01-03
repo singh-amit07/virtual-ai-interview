@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGeneAI } from "@google/genai";
 
 async function main() {
   const ai = new GoogleGenAI({
