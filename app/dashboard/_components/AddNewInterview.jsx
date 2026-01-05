@@ -17,6 +17,7 @@ import { LoaderCircle } from "lucide-react";
 import { GoogleGenAI } from "@google/genai";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
+import { useRouter } from "next/navigation";
 
 function AddNewInterview() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -25,6 +26,7 @@ function AddNewInterview() {
   const [jobexperience, setjobExperience] = useState("");
   const [loading, setLoading] = useState(false);
   const [jsonResponse, setJsonResponse] = useState([]);
+  const router=useRouter();
   const [error, setError] = useState(null);
   const { user } = useUser();
 
@@ -57,9 +59,9 @@ function AddNewInterview() {
         contents,
       });
 
-      // In the current @google/genai SDK, generateContent returns the response object directly
+      
       let MockjsonResp = result.text;
-      // Clean common code block wrappers like ```json ... ```
+     
       MockjsonResp = MockjsonResp
         .replace(/```json/i, "")
         .replace(/```/g, "")
@@ -83,6 +85,11 @@ function AddNewInterview() {
           })
           .returning({ mockId: users.mockId });
         console.log("Inserted ID:", resp);
+        if(resp)
+        {
+          setOpenDialog(false);
+          router.push('/dashboard/interview/'+resp[0]?.mockId);
+        }
       } else {
         console.log("ERROR: Empty response from AI");
       }
