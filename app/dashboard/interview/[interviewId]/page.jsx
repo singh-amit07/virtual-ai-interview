@@ -6,6 +6,7 @@ import { eq } from 'drizzle-orm'
 import Webcam from 'react-webcam'
 import { Lightbulb, WebcamIcon } from 'lucide-react'
 import React ,{ useEffect, useState }  from 'react'
+import Link from 'next/link'
 
 
 function interview({params}) {
@@ -76,7 +77,10 @@ function interview({params}) {
         </div>     
 
 <div className='flex justify-end items-end w-full px-6'>
-  <Button>Start Interview</Button>
+  <Link href={'/dashboard/interview/'+resolvedParams.interviewId+'/start'}>
+   <Button>Start Interview</Button>
+  </Link>
+ 
 </div>
     </div>
   )
