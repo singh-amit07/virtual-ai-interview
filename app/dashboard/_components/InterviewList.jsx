@@ -4,7 +4,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { desc, eq } from 'drizzle-orm';
 import InterviewItemCard from './InterviewItemCard';
 
-// Server component: fetch and display the current user's previous mock interviews
+
 export default async function InterviewList() {
   const user = await currentUser();
   const email = user?.primaryEmailAddress?.emailAddress;

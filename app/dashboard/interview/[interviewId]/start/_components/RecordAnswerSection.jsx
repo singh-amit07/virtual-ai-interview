@@ -52,17 +52,17 @@ function RecordAnswerSection({
     });
 
     if (isRecording) {
-      // stop recording and validate answer length
+     
 
       stopSpeechToText();
     } else {
-      // start recording
+      
 
       try {
         startSpeechToText();
       } catch (error) {
         if (error.name === "InvalidStateError") {
-          // Already started, ignore
+          
         } else {
           throw error;
         }
@@ -122,7 +122,7 @@ function RecordAnswerSection({
       const parsed = JSON.parse(mockJsonResp);
       console.log("Parsed AI feedback JSON:", parsed);
 
-      // keep in state for UI and use same parsed object for DB
+      
       setFeedbackResult(parsed);
       toast("AI feedback generated");
 

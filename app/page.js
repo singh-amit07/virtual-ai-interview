@@ -33,10 +33,9 @@ export default function Home() {
       className="relative min-h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/interview.webp')" }}
     >
-      {/* Overlay (FIXED) */}
       <div className="absolute inset-0 bg-black/70 pointer-events-none"></div>
 
-      {/* Top Right Sign In */}
+      
        <div className="absolute top-6 right-8 z-50">
         <button
           onClick={() => router.push('/sign-in')}
@@ -46,7 +45,7 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Left Note Section */}
+     
       <div className="absolute left-10 bottom-10 z-10 max-w-sm text-white">
         <h3 className="text-lg font-semibold mb-2">Note:</h3>
         <p className="text-sm leading-relaxed text-gray-200">
@@ -56,7 +55,7 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Center Content */}
+      
       <div className="relative z-10 flex items-center justify-center min-h-screen text-center px-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-wide text-white">

@@ -4,9 +4,9 @@ import { mockInterview } from "@/utils/schema";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 
-// GET /api/mock-interviews - return all rows from mockInterview table
+
 export async function GET() {
-  // If DB URL is not configured, avoid throwing and just return empty data
+
   if (!process.env.DATABASE_URL) {
     console.warn("DATABASE_URL is not set; returning empty data");
     return NextResponse.json({ data: [] });
@@ -17,13 +17,12 @@ export async function GET() {
     return NextResponse.json({ data: rows });
   } catch (error) {
     console.error("Error fetching mock interviews", error);
-    // If DB is unreachable or misconfigured, don't crash the app.
-    // Return an empty list so the frontend still works.
+    
+    
     return NextResponse.json({ data: [], error: "DB_UNAVAILABLE" });
   }
 }
 
-// POST /api/mock-interviews - create a new mock interview row
 export async function POST(request) {
   if (!process.env.DATABASE_URL) {
     console.warn("DATABASE_URL is not set; cannot write to DB");
