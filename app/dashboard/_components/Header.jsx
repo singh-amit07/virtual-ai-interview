@@ -7,7 +7,7 @@ function Header() {
   const path = usePathname();
   useEffect(() => {
     console.log(path);
-  }, []);
+  }, [path]);
 
   return (
     <div className="flex p-4 items-center justify-between bg-secondary shadow-md">

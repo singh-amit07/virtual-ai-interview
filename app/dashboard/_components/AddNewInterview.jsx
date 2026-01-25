@@ -10,13 +10,9 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 import { Textarea } from "@/components/ui/textarea";
-import { db } from "@/utils/db";
-import { users } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import { LoaderCircle } from "lucide-react";
 import { GoogleGenAI } from "@google/genai";
-import { v4 as uuidv4 } from "uuid";
-import moment from "moment";
 import { useRouter } from "next/navigation";
 
 function AddNewInterview() {
@@ -72,23 +68,30 @@ function AddNewInterview() {
       setJsonResponse(parsed);
 
       if (parsed) {
-        const resp = await db
-          .insert(users)
-          .values({
-            mockId: uuidv4(),
-            jsonMockResp: MockjsonResp,
-            jobPosition: jobPosition,
+        const res = await fetch("/api/mock-interviews", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            jobPosition,
             jobDesc: jobDescription,
             jobExperience: jobexperience,
+            jsonMockResp: MockjsonResp,
             createdBy: user?.primaryEmailAddress?.emailAddress,
-            createdAt: moment().format("YYYY-MM-DD"),
-          })
-          .returning({ mockId: users.mockId });
-        console.log("Inserted ID:", resp);
-        if(resp)
-        {
+          }),
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to save interview in database");
+        }
+
+        const data = await res.json();
+        const mockId = data.mockId;
+
+        if (mockId) {
           setOpenDialog(false);
-          router.push('/dashboard/interview/'+resp[0]?.mockId);
+          router.push("/dashboard/interview/" + mockId);
         }
       } else {
         console.log("ERROR: Empty response from AI");
@@ -164,7 +167,7 @@ function AddNewInterview() {
                   {loading ? (
                     <>
                       <LoaderCircle className="animate-spin" />
-                      'Generating from AI'
+                      <span>Generating from AI</span>
                     </>
                   ) : (
                     "Start Interview"
