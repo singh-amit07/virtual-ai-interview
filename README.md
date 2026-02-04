@@ -34,4 +34,23 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# virtual-ai-interview" 
+
+---
+
+## Database connection troubleshooting 🔧
+
+If you see `fetch failed` or `Connect Timeout` errors when the app tries to query the DB, verify your `DATABASE_URL` and network connectivity. A helper script is included to test the DB from your machine:
+
+```bash
+# runs a simple `select 1` against DATABASE_URL
+npm run test-db
+```
+
+If the script fails, check:
+
+- That `DATABASE_URL` is set in `.env.local` or your environment.
+- Your Neon/Postgres instance is live and uses the serverless HTTP endpoint (if applicable).
+- Your network (VPN/firewall) allows outbound HTTPS to the DB host.
+
+If you need help diagnosing output from `npm run test-db`, paste the error here and I can help interpret it.
+"# virtual-ai-interview"

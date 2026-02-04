@@ -32,7 +32,11 @@ The project is designed to support effective and confident interview preparation
         <main className="flex items-center justify-center px-8 py-12 lg:col-span-6">
           <div className="max-w-md w-full">
            
-            <SignIn />
+            <SignIn 
+             routing="path"
+             path="/sign-in"
+             redirectUrl="/dashboard"
+            />
           </div>
         </main>
       </div>

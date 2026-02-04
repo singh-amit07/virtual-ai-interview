@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { db } from "@/utils/db";
+import { executeQuery } from "@/utils/db";
 import { mockInterview } from "@/utils/schema";
 import { eq } from "drizzle-orm";
+import { NextResponse } from "next/server";
 
 export async function GET(_request, { params }) {
   const { mockId } = await params;
@@ -12,15 +12,17 @@ export async function GET(_request, { params }) {
   }
 
   try {
-    const rows = await db
-      .select()
-      .from(mockInterview)
-      .where(eq(mockInterview.mockId, mockId))
-      .limit(1);
+    const rows = await executeQuery(async (db) =>
+      db
+        .select()
+        .from(mockInterview)
+        .where(eq(mockInterview.mockId, mockId))
+        .limit(1),
+    );
 
     return NextResponse.json({ data: rows[0] || null });
   } catch (error) {
-    console.error("Error fetching mock interview by id", error);
+    console.error("Error fetching mock interview by id:", error.message);
     return NextResponse.json({ data: null, error: "DB_UNAVAILABLE" });
   }
 }

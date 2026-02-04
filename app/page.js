@@ -9,6 +9,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
  const router = useRouter()
+
   useEffect(() => {
     async function load() {
       try {
@@ -31,21 +32,21 @@ export default function Home() {
   return (
    <div
       className="relative min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/interview.webp')" }}
-    >
+      style={{ backgroundImage: "url('/interview.webp')" }}>
       <div className="absolute inset-0 bg-black/70 pointer-events-none"></div>
 
       
+
        <div className="absolute top-6 right-8 z-50">
         <button
           onClick={() => router.push('/sign-in')}
-          className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black transition rounded"
-        >
+          className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black transition rounded">
           Sign In
         </button>
       </div>
 
      
+
       <div className="absolute left-10 bottom-10 z-10 max-w-sm text-white">
         <h3 className="text-lg font-semibold mb-2">Note:</h3>
         <p className="text-sm leading-relaxed text-gray-200">
@@ -54,6 +55,7 @@ export default function Home() {
           and constructive feedback for skill improvement.
         </p>
       </div>
+
 
       
       <div className="relative z-10 flex items-center justify-center min-h-screen text-center px-6">
